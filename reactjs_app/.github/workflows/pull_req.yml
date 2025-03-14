@@ -1,0 +1,24 @@
+name: Create Pull Request
+
+on:
+  push:
+    branches:
+      - 'feature/*'  # Will trigger on any push to a feature branch
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Automated pull request"
+          title: "Automated PR for feature branch"
+          body: |
+            This pull request is automatically generated via GitHub Actions.
+          base: main
+          branch: feature/update-homepage
