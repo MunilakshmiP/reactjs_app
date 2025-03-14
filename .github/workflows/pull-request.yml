@@ -1,0 +1,22 @@
+name: Create Pull Request on Push to feature/update-homepage
+
+on:
+  push:
+    branches:
+      - feature/update-homepage
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          branch: feature/update-homepage
+          title: "Auto-created PR for feature/homepage"
+          body: "This PR is automatically created for review and approval."
