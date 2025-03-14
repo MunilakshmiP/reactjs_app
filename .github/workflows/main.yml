@@ -1,9 +1,9 @@
-name: Create Pull Request on Push to feature/update-homepage
+name: Auto PR Workflow
 
 on:
   push:
     branches:
-      - feature/update-homepage
+      - 'feature/*'  # This should match any branch starting with "feature/"
 
 jobs:
   create-pr:
@@ -11,12 +11,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
-      - name: Create Pull Request
+
+      - name: Create pull request
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: main
-          branch: feature/update-homepage
-          title: "Auto-created PR for feature/homepage"
-          body: "This PR is automatically created for review and approval."
+          head: feature/update-homepage
+          title: 'Auto-created PR'
+          body: 'This is an auto-created PR for the feature/update-homepage branch.'
